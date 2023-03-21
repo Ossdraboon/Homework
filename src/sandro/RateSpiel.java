@@ -7,15 +7,15 @@ public class RateSpiel {
     static Random rand = new Random();
 
     public static void main(String[] args) {
-        String name = readText("Wie ist dein Name?");
+        String name = readText("Wie ist dein Name?");sandro
         System.out.println("Willkommen " + name + " beim super coolen Zahlen Ratespiel ");
-        System.out.println("Du hast nur 10 versuche!");
+        System.out.println("Du hast nur 5 versuche!");
         int randomValue = rand.nextInt(101);
         //  System.out.println(randomValue);
 
         int i = 0;
         int nummer = -1;
-        while ((i < 10) && (nummer != randomValue)) {
+        while ((i < 5) && (nummer != randomValue)) {
             nummer = spielerZahl("Was ist deine Nummer", 0, 100);
             if (nummer < randomValue) {
                 System.out.println("deine Zahl ist zu niedrig");
@@ -25,9 +25,9 @@ public class RateSpiel {
             ++i;
         }
         if (nummer == randomValue) {
-            System.out.println("du hast gewonnen, Drini geht mit ein Bier trinken");
+            System.out.println("du hast gewonnen!!!");
         } else {
-            System.out.println("Mike!\nDie richtige Zahl war: " + randomValue);
+            System.out.println("Looser!\nDie richtige Zahl war: " + randomValue);
         }
         System.out.println("Danke fürs Spielen");
     }
