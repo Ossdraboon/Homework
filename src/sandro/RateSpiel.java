@@ -7,7 +7,7 @@ public class RateSpiel {
     static Random rand = new Random();
 
     public static void main(String[] args) {
-        String name = readText("Wie ist dein Name?");sandro
+        String name = readText("Wie ist dein Name?");
         System.out.println("Willkommen " + name + " beim super coolen Zahlen Ratespiel ");
         System.out.println("Du hast nur 5 versuche!");
         int randomValue = rand.nextInt(101);
