@@ -1,4 +1,4 @@
-package homework.sandro;
+package homework.sandro.tictactoe;
 
 import java.util.Scanner;
 

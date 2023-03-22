@@ -1,4 +1,4 @@
-package homework.sandro;
+package homework.sandro.mergeSort;
 
 import java.util.Arrays;
 import java.util.Random;
