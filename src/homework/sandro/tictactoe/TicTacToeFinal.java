@@ -62,11 +62,12 @@ public class TicTacToeFinal {
     // TODO: 22.03.23 Methode für Ermittlung von WIN Condition
     public static boolean hasWin(int[][] field, int currentPlayer) {
         for (int i = 0; i < field.length; i++) {
-            if (hasWinInRow(field, currentPlayer, i) ||
-                    (hasWinInCol(field, currentPlayer, i)
-//                            || (hasWinInDiagonal(field, currentPlayer))
-
-                    )) {
+            if (hasWinInRow(field, currentPlayer, i)
+                    || (hasWinInCol(field, currentPlayer, i)
+                    || (hasWinInDiagOPT(field, currentPlayer))
+//                    || (hasWinInDiag(field, currentPlayer)
+//                    || (hasWinInDiag2(field, currentPlayer)))
+            )) {
                 return true;
             }
         }
@@ -91,16 +92,33 @@ public class TicTacToeFinal {
         return true;
     }
 
-//    public static boolean hasWinInDiagonal(int[][] field, int currentPlayer, int row, int col) {
-//        for (int i = 0; i < field.length; i++) {
-//            for (int j = 0; j < field.length; j++) {
-//                if (i == j) {
-//                    return false;
-//                }
-//            }
-//        }
-//        return true;
-//    }
+    public static boolean hasWinInDiag(int[][] field, int currentPlayer) {
+        for (int iRow = 0; iRow < field.length; iRow++) {
+            if (field[iRow][iRow] != currentPlayer) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean hasWinInDiagOPT(int[][] field, int currentPlayer) {
+        if ((field[0][0] == currentPlayer && field[1][1] == currentPlayer && field[2][2] == currentPlayer)
+                || (field[0][2] == currentPlayer && field[1][1] == currentPlayer && field[2][0] == currentPlayer)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean hasWinInDiag2(int[][] field, int currentPlayer) {
+        for (int iRow = 0; iRow < field.length; iRow++) {
+            if (field[iRow][field.length - iRow - 1] != currentPlayer) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public static boolean hasAnyMoreMoves(int[][] field) {
         for (int i = 0; i < field.length; i++) {
