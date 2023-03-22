@@ -64,11 +64,10 @@ public class TicTacToeFinal {
         for (int i = 0; i < field.length; i++) {
             if (hasWinInRow(field, currentPlayer, i)
                     || (hasWinInCol(field, currentPlayer, i)
-                    || (hasWinInDiagOPT(field,currentPlayer))
+                    || (hasWinInDiagOPT(field, currentPlayer))
 //                    || (hasWinInDiag(field, currentPlayer)
 //                    || (hasWinInDiag2(field, currentPlayer)))
-            ))
-            {
+            )) {
                 return true;
             }
         }
@@ -101,15 +100,16 @@ public class TicTacToeFinal {
         }
         return true;
     }
+
     public static boolean hasWinInDiagOPT(int[][] field, int currentPlayer) {
-       if ((field [0][0] == currentPlayer && field [1][1] == currentPlayer && field [2][2] ==currentPlayer)
-       || (field [0][2] == currentPlayer && field [1][1] == currentPlayer && field [2][0] ==currentPlayer))
-        {
-                return true;
-            }
+        if ((field[0][0] == currentPlayer && field[1][1] == currentPlayer && field[2][2] == currentPlayer)
+                || (field[0][2] == currentPlayer && field[1][1] == currentPlayer && field[2][0] == currentPlayer)) {
+            return true;
+        }
 
         return false;
     }
+
     public static boolean hasWinInDiag2(int[][] field, int currentPlayer) {
         for (int iRow = 0; iRow < field.length; iRow++) {
             if (field[iRow][field.length - iRow - 1] != currentPlayer) {
