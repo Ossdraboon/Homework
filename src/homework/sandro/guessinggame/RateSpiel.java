@@ -1,4 +1,4 @@
-package sandro;
+package homework.sandro.guessinggame;
 
 import java.util.Random;
 import java.util.Scanner;

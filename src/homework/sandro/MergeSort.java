@@ -1,4 +1,4 @@
-package sandro;
+package homework.sandro;
 
 public class MergeSort {
         // Merges two subarrays of arr[].

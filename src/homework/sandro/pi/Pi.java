@@ -1,4 +1,4 @@
-package sandro;
+package homework.sandro.pi;
 
 public class Pi {
 

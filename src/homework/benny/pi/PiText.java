@@ -1,4 +1,4 @@
-package beni;
+package homework.benny.pi;
 
 public class PiText {
 

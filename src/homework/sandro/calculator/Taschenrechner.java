@@ -1,4 +1,4 @@
-package sandro;
+package homework.sandro.calculator;
 
 import java.util.Scanner;
 

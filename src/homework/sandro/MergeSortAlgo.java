@@ -1,4 +1,4 @@
-package sandro;
+package homework.sandro;
 
 import java.util.Arrays;
 import java.util.Random;
