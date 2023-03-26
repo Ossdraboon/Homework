@@ -27,7 +27,7 @@ public class FourInARow {
     //TODO sandro: find a solution
     /*
     private static int diagonalAdjacentMaxCountLoop(int[][] board, boolean[][] alreadyVisitedFields, int currentPlayer, int row, int col) {
-        int topLeftToBottomRightCount, topLeftToBottomRightLowerCount, topLeftToBottomRightUpperCount, bottomLeftToTopRightCount;
+        int topLeftToBottomRightCount, bottomLeftToTopRightLowerCount, bottomLeftToTopRightUpperCount, bottomLeftToTopRightCount;
 
         //[row -3, col -3], [row-2, col-2], [row-1, col-1], [row, col], [row + 1, col + 1], [row + 2, col +2], [row + 3, col +3]
         for(int i = -3; i <= 3; i++) {
@@ -38,10 +38,10 @@ public class FourInARow {
         //[row -1, col + 1], [row + 1, col -1], [row -2, col + 2], [row + 2, col -2], [row - 3, col + 3], [row + 3, col - 3]
         int
         for(int i = 1; i <= 3; i++) {
-            // calculate topLeftToBottomRightLowerCount
-            // calculate topLeftToBottomRightUpperCount
+            // calculate bottomLeftToTopRightLowerCount
+            // calculate bottomLeftToTopRightUpperCount
         }
-        // topLeftToBottomRightCount will be the sum of both
+        // bottomLeftToTopRight will be the sum of both
     } */
 
     private static boolean isIndexOutOfBounds(int row, int col) {
