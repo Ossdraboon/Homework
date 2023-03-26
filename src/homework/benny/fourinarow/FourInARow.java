@@ -26,7 +26,7 @@ public class FourInARow {
 
     //TODO sandro: find a solution
     /*
-    private static int diagonalAdjacentMaxCountLoop(int[][] board, boolean[][] alreadyVisitedFields, int currentPlayer, int row, int col) {
+    private static int diagonalAdjacentMaxCountLoop(int[][] board, int currentPlayer, int row, int col) {
         int topLeftToBottomRightCount, bottomLeftToTopRightLowerCount, bottomLeftToTopRightUpperCount, bottomLeftToTopRightCount;
 
         //[row -3, col -3], [row-2, col-2], [row-1, col-1], [row, col], [row + 1, col + 1], [row + 2, col +2], [row + 3, col +3]
