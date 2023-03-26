@@ -10,28 +10,39 @@ public class FourInARow {
     // alreadyVisitedFields -> this is just a boolean 2d array of the same size of your game board to ensure that your recursion does not run endlessly -> stack overflow. You use it to remember which row, col combinations you already considered in your calculation
     // currentPlayer -> the player who just dropped their stone
     // row, col -> the LATEST move
-    private static int diagonalOne(int[][] board, boolean[][] alreadyVisitedFields, int currentPlayer, int row, int col) {
+    private static int diagonalAdjacentMaxCountRecursive(int[][] board, boolean[][] alreadyVisitedFields, int currentPlayer, int row, int col) {
         if(isIndexOutOfBounds(row, col) ||  alreadyVisitedFields[row][col]) {
             return 0;
         } else if(board[row][col] != currentPlayer) {
             return 0;
         } else {
             alreadyVisitedFields[row][col] = true;
-            return 1 +  diagonalOne(board, alreadyVisitedFields, currentPlayer, row - 1, col - 1) + diagonalOne(board, alreadyVisitedFields, currentPlayer, row + 1, col + 1);
+            int topLeftToBottomRightCount = 1 +  diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row - 1, col - 1) + diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row + 1, col + 1);
+            int bottomLetftToTopRightCount = 1 +  diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row - 1, col + 1) + diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row +1, col - 1);
+            // I check both diagonals and then return the bigger value
+            return Math.max(topLeftToBottomRightCount, bottomLetftToTopRightCount);
         }
     }
 
-    // bottom left to top right
-    private static int diagonalTwo(int[][] board, boolean[][] alreadyVisitedFields,  int currentPlayer, int row, int col) {
-        if(isIndexOutOfBounds(row, col) || alreadyVisitedFields[row][col]) {
-            return 0;
-        } else if(board[row][col] != currentPlayer) {
-            return 0;
-        } else {
-            alreadyVisitedFields[row][col] = true;
-            return 1 +  diagonalTwo(board, alreadyVisitedFields, currentPlayer, row - 1, col + 1) + diagonalTwo(board, alreadyVisitedFields, currentPlayer, row +1, col - 1);
+    //TODO sandro: find a solution
+    /*
+    private static int diagonalAdjacentMaxCountLoop(int[][] board, boolean[][] alreadyVisitedFields, int currentPlayer, int row, int col) {
+        int topLeftToBottomRightCount, topLeftToBottomRightLowerCount, topLeftToBottomRightUpperCount, bottomLeftToTopRightCount;
+
+        //[row -3, col -3], [row-2, col-2], [row-1, col-1], [row, col], [row + 1, col + 1], [row + 2, col +2], [row + 3, col +3]
+        for(int i = -3; i <= 3; i++) {
+
         }
-    }
+
+        // try to figure out what I mean with lower and upper. Look at the way I structured the [row, column] pairs, it is not random. They are aligned this way for a reason
+        //[row -1, col + 1], [row + 1, col -1], [row -2, col + 2], [row + 2, col -2], [row - 3, col + 3], [row + 3, col - 3]
+        int
+        for(int i = 1; i <= 3; i++) {
+            // calculate topLeftToBottomRightLowerCount
+            // calculate topLeftToBottomRightUpperCount
+        }
+        // topLeftToBottomRightCount will be the sum of both
+    } */
 
     private static boolean isIndexOutOfBounds(int row, int col) {
         return row < 0 || row >= BOARD_ROW_COUNT  || col < 0 || col >= BOARD_COL_COUNT;
@@ -48,7 +59,7 @@ public class FourInARow {
             {0,2,0,0,0,0},
         };
 
-        int countBotToTop = diagonalTwo(bottomLeftToTopRight, new boolean[7][6],1, 5, 1);
+        int countBotToTop = diagonalAdjacentMaxCountRecursive(bottomLeftToTopRight, new boolean[7][6],1, 5, 1);
         if(countBotToTop >= 4) {
             System.out.println("Yey! Winner bottomLeftToTopRight");
         }
@@ -62,8 +73,7 @@ public class FourInARow {
             {0,0,0,0,2,0},
             {0,2,0,0,0,0},
         };
-        int countTopToBot = diagonalOne(topLeftToBottomRight, new boolean[7][6],2, 3, 2);
-        System.out.println(countTopToBot);
+        int countTopToBot = diagonalAdjacentMaxCountRecursive(topLeftToBottomRight, new boolean[7][6],2, 3, 2);
         if(countTopToBot >= 4) {
             System.out.println("Yey! Winner topLeftToBottomRight");
         }
