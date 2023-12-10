@@ -4,7 +4,7 @@ import homework.sandro.Colors;
 
 import java.util.Scanner;
 
-public class FourInARow {
+public class FourInARowHomework {
 //    static {
 //        if (Math.random() > 0.5) {
 //            throw new RuntimeException("Hi Sandro, was geht ab?");
@@ -64,9 +64,16 @@ public class FourInARow {
     }
 
     public static boolean hasWin(int[][] field, int currentplayer) {
+        int countTopToBot = diagonalAdjacentMaxCountRecursive(field,new boolean[6][7],1,6,7);
+
+
         for (int i = 0; i < field.length; i++) {
             if (detectWinRow(field, i, currentplayer)
-                    || (detectWinCol(field, i, currentplayer)                     //what does "i" stand for (field, i, cur...)
+                    || (detectWinCol(field, i, currentplayer)       //what does "i" stand for (field, i, cur...)
+                    || (countTopToBot >=4)
+
+
+
 //                    || (detectWinDiagonalfront(field, currentplayer))
 //                    || (detectWinDiagonalfront(field, row, col, currentplayer))
                                                                                    //ignore row col, testing purpose
@@ -130,7 +137,6 @@ public class FourInARow {
         }
         return false;
     }
-
     public static boolean detectWinDiagonalfront2(int[][] field, int row, int col, int currentplayer) {
         int count = 0;
         for (int i = 0; i < 4; i++) {
@@ -193,7 +199,6 @@ public class FourInARow {
         }
         return false;
     }
-
     public static boolean detectWinDiagonalback(int[][] field, int currentplayer) {
         int count = 0;
         for (int i = 0; i < field.length; i++) {
@@ -213,8 +218,6 @@ public class FourInARow {
         }
         return false;
     }
-
-
     public static boolean detectWinRow(int[][] field, int row, int currentplayer) {         //do i need a int row (from "i") or could i just use field.length ?
         int count = 0;
         for (int i = 0; i < field[row].length; i++) {
@@ -229,8 +232,6 @@ public class FourInARow {
         }
         return false;
     }
-
-
     public static boolean detectWinCol(int[][] field, int col, int currentplayer) {
         int count = 0;
         for (int i = 0; i < field[col].length - 1; i++) {  //why field[col].length has to be -1???
@@ -245,7 +246,6 @@ public class FourInARow {
         }
         return false;
     }
-
     public static boolean hasAnyMoreMoves(int[][] field, int row, int col) {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -256,7 +256,6 @@ public class FourInARow {
         }
         return false;
     }
-
     public static int readInt(String message) {
         int result = -1;
         Scanner sc = new Scanner(System.in);
@@ -275,8 +274,6 @@ public class FourInARow {
         }
         return result;
     }
-
-
     public static void printBoard(int[][] field, int row, int col) {
         for (int i = 0; i < 7; i++) {
             System.out.print("Col:" + i + "|");
@@ -299,6 +296,51 @@ public class FourInARow {
 
 
         System.out.println("==========================================");
+    }
+
+
+
+    private static final int BOARD_ROW_COUNT = 7;
+    private static final int BOARD_COL_COUNT = 6;
+    private static int diagonalAdjacentMaxCountRecursive(int[][] board, boolean[][] alreadyVisitedFields, int currentPlayer, int row, int col) {
+        if (isIndexOutOfBounds(row, col) || alreadyVisitedFields[row][col]) {
+            return 0;
+        } else if (board[row][col] != currentPlayer) {
+            return 0;
+        } else {
+            alreadyVisitedFields[row][col] = true;
+            int topLeftToBottomRightCount = 1 + diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row - 1, col - 1) + diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row + 1, col + 1);
+            int bottomLetftToTopRightCount = 1 + diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row - 1, col + 1) + diagonalAdjacentMaxCountRecursive(board, alreadyVisitedFields, currentPlayer, row + 1, col - 1);
+            // I check both diagonals and then return the bigger value
+            return Math.max(topLeftToBottomRightCount, bottomLetftToTopRightCount);
+        }
+    }
+
+    private static int diagonalAdjacentMaxCountLoop(int[][] board, int currentPlayer, int row, int col) {
+        int topLeftToBottomRightCount = 0;
+
+        //[row -3, col -3], [row-2, col-2], [row-1, col-1], [row, col], [row + 1, col + 1], [row + 2, col +2], [row + 3, col +3]
+        for (int i = -3; i <= 3; i++) {
+            if (board[row][col] == currentPlayer) {
+                topLeftToBottomRightCount++;
+            } else {
+                topLeftToBottomRightCount = 0;
+            }
+            if (topLeftToBottomRightCount == 4) {
+                return topLeftToBottomRightCount;
+            }
+        }
+
+        //[row -1, col + 1], [row + 1, col -1], [row -2, col + 2], [row + 2, col -2], [row - 3, col + 3], [row + 3, col - 3]
+//        int
+//        for (int i = 1; i <= 3; i++) {
+
+//        }
+        // bottomLeftToTopRight will be the sum of both
+        return 0;
+    }
+    private static boolean isIndexOutOfBounds(int row, int col) {
+        return row < 0 || row >= BOARD_ROW_COUNT || col < 0 || col >= BOARD_COL_COUNT;
     }
 
 }
